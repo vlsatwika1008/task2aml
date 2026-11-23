@@ -25,3 +25,58 @@ rescaledX = scaler.transform(X)
 # Display transformed values with 3 decimal places
 np.set_printoptions(precision=3)
 print(rescaledX[0:5, :])
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import Binarizer
+
+# Define column names
+names = ['preg', 'plas', 'pres', 'skin',
+         'test', 'mass', 'pedi', 'age', 'class']
+
+# Read the dataset
+dataframe = pd.read_csv('diabetes.csv', names=names)
+
+# Convert DataFrame into NumPy array
+array = dataframe.values
+
+# Separate input features and output target
+X = array[:, 0:8]
+Y = array[:, 8]
+
+# Create Binarizer with threshold 0
+binarizer = Binarizer(threshold=0.0).fit(X)
+
+# Convert input features into binary values
+binaryX = binarizer.transform(X)
+
+# Display the first five rows
+np.set_printoptions(precision=3)
+print(binaryX[0:5, :])
+
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import MinMaxScaler
+
+# Define column names
+names = ['preg', 'plas', 'pres', 'skin',
+         'test', 'mass', 'pedi', 'age', 'class']
+
+# Read the dataset
+dataframe = pd.read_csv('diabetes.csv', names=names)
+
+# Convert DataFrame into NumPy array
+array = dataframe.values
+
+# Separate input features and output target
+X = array[:, 0:8]
+Y = array[:, 8]
+
+# Initialize MinMaxScaler with range 0 to 1
+scaler = MinMaxScaler(feature_range=(0, 1))
+
+# Fit and transform the input features
+rescaledX = scaler.fit_transform(X)
+
+# Display the first ten rows
+np.set_printoptions(precision=2)
+print(rescaledX[0:10, :])
