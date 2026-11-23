@@ -1,0 +1,27 @@
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+
+# Define column names
+names = ['preg', 'plas', 'pres', 'skin',
+         'test', 'mass', 'pedi', 'age', 'class']
+
+# Read the dataset
+dataframe = pd.read_csv('diabetes.csv', names=names)
+
+# Convert DataFrame into NumPy array
+array = dataframe.values
+
+# Separate input features and output target
+X = array[:, 0:8]
+Y = array[:, 8]
+
+# Create the StandardScaler object and learn parameters
+scaler = StandardScaler().fit(X)
+
+# Transform the input features
+rescaledX = scaler.transform(X)
+
+# Display transformed values with 3 decimal places
+np.set_printoptions(precision=3)
+print(rescaledX[0:5, :])
